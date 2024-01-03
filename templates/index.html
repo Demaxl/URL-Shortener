@@ -37,9 +37,9 @@
 					<h1 class="display-4">Your shortened link is ready!</h1>
 				
 					<div class="input-group mt-5">
-						<input type="text" class="form-control" value="{{ result }}" readonly>
+						<input type="text" class="form-control" id="result-field" value="{{ result }}" readonly>
 
-						<span class="input-group-text" title="Copy link" data-bs-toggle="tooltip" style="cursor: pointer;">
+						<span class="input-group-text" title="Copy link" data-bs-toggle="tooltip" style="cursor: pointer;" id="copy-btn">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy"
 								viewBox="0 0 16 16">
 								<path fill-rule="evenodd"
@@ -68,6 +68,25 @@
 			var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 				return new bootstrap.Tooltip(tooltipTriggerEl)
 			})
+
+			function copy(e) {
+				// Get the text field
+				var copyText = document.getElementById("result-field");
+				
+
+				// Select the text field
+				copyText.select();
+				copyText.setSelectionRange(0, 99999); // For mobile devices
+
+				// Copy the text inside the text field
+				navigator.clipboard.writeText(copyText.value);
+
+				// Alert the copied text
+				alert("Copied the link " + copyText.value);
+			}
+
+			document.querySelector("#copy-btn").addEventListener("click", copy);
+
 		</script>
 	</body>
 

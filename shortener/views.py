@@ -1,6 +1,8 @@
 import secrets
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect
+
 from django.views.generic import View
 from pprint import pprint
 from django.db import IntegrityError
@@ -38,3 +40,6 @@ class IndexView(View):
                 pass
         return identifier
         
+def redirectLink(request, identifier):
+    link = get_object_or_404(Link, identifier=identifier)
+    return HttpResponseRedirect(link.url)
